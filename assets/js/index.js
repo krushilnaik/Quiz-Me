@@ -1,16 +1,16 @@
-var startButton: HTMLElement = document.getElementById("start");
-var timer: HTMLElement = document.getElementById("timer");
-var countdown: HTMLElement = document.getElementById("countdown");
+var startButton = document.getElementById("start");
+var timer = document.getElementById("timer");
+var countdown = document.getElementById("countdown");
 var quizTopic = document.getElementById("topics");
-var ticker: number = 0;
+var ticker = 0;
+var highscores = {};
 
 // I don't wanna use XMLHTTPRqeusts for this just yet
 // and jQuery intellisense isn't working
 // so just hard code one of the files for now
 var javascript = {
 	"topicName": "JavaScript",
-	"questions": [
-		{
+	"questions": [{
 			"question": "Question 1",
 			"choices": ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
 			"correctChoice": 0
@@ -31,25 +31,21 @@ var javascript = {
 			"correctChoice": 3
 		}
 	]
-}
+};
 
 function runTimer() {
 	clearInterval(ticker);
-
 	timer.style.color = "green";
 	countdown.innerText = "16";
 	let seconds = Number(countdown.innerText);
-
-	ticker = setInterval(function() {
+	ticker = setInterval(function () {
 		if (seconds == 0) {
 			console.log("Game over");
 			return;
 		}
-		
 		seconds--;
-
-		if (seconds < 11) timer.style.color = "crimson";
-
+		if (seconds < 11)
+			timer.style.color = "crimson";
 		countdown.innerHTML = String(seconds);
 	}, 1000);
 }
@@ -64,3 +60,12 @@ function startGame() {
 }
 
 startButton.addEventListener("click", startGame);
+
+function loadPage() {
+	if (localStorage.getItem("highscores") === null) {
+		localStorage.setItem("highscores", JSON.stringify({}));
+	}
+	highscores = JSON.parse(localStorage.getItem("highscores"));
+}
+
+loadPage();
