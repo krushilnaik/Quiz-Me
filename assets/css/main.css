@@ -1,0 +1,20 @@
+* {
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+:root {
+	font-size: 23px;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0%;
+	padding: 0%;
+	width: 100vw;
+	height: 100vh;
+	max-width: 100%;
+}

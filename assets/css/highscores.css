@@ -1,0 +1,30 @@
+main {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+button {
+	border-radius: 5px;
+	background-color: #663399;
+	color: white;
+	border: none;
+	font-size: 20px;
+}
+	button:hover {
+		background-color: #582c85;
+	}
+	button a {
+		text-decoration: none;
+		color: white;
+	}
+
+#scores {
+	width: 35em;
+}
+	#scores:nth-child(even) {
+		background-color: violet;
+	}
+	#scores:nth-child(odd) {
+		background-color: blueviolet;
+	}
