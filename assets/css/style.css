@@ -52,3 +52,8 @@ button {
 a {
 	text-decoration: none;
 }
+
+select {
+	height: 1.5rem;
+	margin-bottom: 1%;
+}
