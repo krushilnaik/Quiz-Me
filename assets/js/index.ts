@@ -41,7 +41,7 @@ function runTimer() {
 	ticker = setInterval(function () {
 		if (seconds == 0) {
 			console.log("Game over");
-			return;
+			clearInterval(ticker);
 		}
 		seconds--;
 		if (seconds < 11)
@@ -53,6 +53,37 @@ function runTimer() {
 function loadTopic(topic: string) {
 	let filename: string = `${topic.toLowerCase().replace(" ", "-")}.json`;	
 	console.log(filename);
+}
+
+interface QuestionModel {
+	question: string;
+	choices: string[];
+	correctChoice: number;
+}
+
+function buildQuestion(data: QuestionModel): HTMLElement {
+	// console.log(`Building question from model ${data}`);
+	var element = document.createElement("div");
+
+	var question = document.createElement("p");
+	var choices = document.createElement("div");
+	choices.className = "choices-block";
+
+	question.innerText = data.question;
+
+	for (let i = 0; i < data.choices.length; i++) {
+		console.log(`${i+1}. ${data.choices[i]}`);
+
+		let temp = document.createElement("button");
+		temp.textContent = `${i+1}. ${data.choices[i]}`;
+
+		choices.appendChild(temp);
+	}
+
+	element.appendChild(question);
+	element.appendChild(choices);
+
+	return element;
 }
 
 function startGame() {
