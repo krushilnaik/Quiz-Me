@@ -10,7 +10,8 @@ var highscores = {};
 // so just hard code one of the files for now
 var javascript = {
     "topicName": "JavaScript",
-    "questions": [{
+    "questions": [
+        {
             "question": "Question 1",
             "choices": ["Choice 1", "Choice 2", "This will be choice 3", "Choice 4"],
             "correctChoice": 0
@@ -38,18 +39,37 @@ function runTimer() {
     countdown.innerText = "16";
     var seconds = Number(countdown.innerText);
     ticker = setInterval(function () {
+        seconds--;
         if (seconds == 0) {
             console.log("Game over");
             clearInterval(ticker);
         }
-        seconds--;
         if (seconds < 11)
             timer.style.color = "crimson";
         countdown.innerHTML = String(seconds);
     }, 1000);
 }
-function buildQuestion(data) {
+// function loadTopic(topic: string) {
+// 	let filename: string = `${topic.toLowerCase().replace(" ", "-")}.json`;
+// }
+function checkAnswer(userChoice, questionNumber) {
+    var choiceIndex = Number(userChoice.innerText[0]) - 1;
+    var correctChoice = javascript.questions[questionNumber].correctChoice;
+    if (choiceIndex !== correctChoice) {
+        countdown.innerText = String(Number(countdown.innerText) - 5);
+    }
+    if (questionNumber === javascript.questions.length - 1) {
+        return;
+    }
+    else {
+        container.innerHTML = "";
+        container.appendChild(buildQuestion("JavaScript", questionNumber + 1));
+    }
+}
+function buildQuestion(topicName, questionNumber) {
+    console.log("Building " + topicName + " question " + (questionNumber + 1));
     var element = document.createElement("div");
+    var data = javascript.questions[questionNumber];
     var question = document.createElement("p");
     var choices = document.createElement("div");
     choices.className = "choices-block";
@@ -59,6 +79,7 @@ function buildQuestion(data) {
         var temp = document.createElement("button");
         temp.textContent = i + 1 + ". " + data.choices[i];
         temp.className = "choice";
+        temp.addEventListener("click", function () { checkAnswer(this, questionNumber); });
         choices.appendChild(temp);
     }
     element.appendChild(question);
@@ -66,10 +87,11 @@ function buildQuestion(data) {
     return element;
 }
 function startGame() {
-    var questions = javascript.questions;
+    // let questions: QuestionModel[] = javascript.questions;
     var qIndex = 0;
+    var topic = "JavaScript";
     container.innerHTML = "";
-    container.appendChild(buildQuestion(questions[qIndex]));
+    container.appendChild(buildQuestion(topic, qIndex));
     runTimer();
 }
 startButton.addEventListener("click", startGame);
