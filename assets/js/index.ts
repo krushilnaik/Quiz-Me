@@ -76,6 +76,7 @@ function buildQuestion(data: QuestionModel): HTMLElement {
 
 		let temp = document.createElement("button");
 		temp.textContent = `${i+1}. ${data.choices[i]}`;
+		temp.className = "choice";
 
 		choices.appendChild(temp);
 	}
