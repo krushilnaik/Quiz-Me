@@ -19,19 +19,21 @@ main {
 		margin: 0%;
 	}
 
-button {
+#start {
 	line-height: 2rem;
 	font-size: 1rem;
 	border-radius: .6rem;
 	border: solid 3px indianred;
+	align-self: center;
 }
-	button:hover {
+	#start:hover {
 		cursor: pointer;
 	}
 
 p {
 	margin: 0%;
 	padding: 1%;
+	text-align: center;
 }
 
 a {
@@ -41,6 +43,14 @@ a {
 select {
 	height: 1.5rem;
 	margin-bottom: 1%;
+	align-self: center;
+	width: max-content;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
 }
 
 .choices-block {
