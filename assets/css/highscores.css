@@ -23,8 +23,8 @@ button {
 	width: 35em;
 }
 	#scores:nth-child(even) {
-		background-color: violet;
+		background-color: rgb(253, 169, 242);
 	}
 	#scores:nth-child(odd) {
-		background-color: blueviolet;
+		background-color: violet;
 	}

@@ -50,13 +50,14 @@ function runTimer() {
 	}, 1000);
 }
 
-// function loadTopic() {
-// 	let filename = `${topic.toLowerCase().replace(" ", "-")}.json`;
-// }
+function loadTopic(topic: string) {
+	let filename: string = `${topic.toLowerCase().replace(" ", "-")}.json`;	
+	console.log(filename);
+}
 
 function startGame() {
 	runTimer();
-	// loadTopic();
+	loadTopic("JavaScript");
 }
 
 startButton.addEventListener("click", startGame);
