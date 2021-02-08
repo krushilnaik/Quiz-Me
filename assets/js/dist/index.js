@@ -1,6 +1,7 @@
 var startButton = document.getElementById("start");
 var timer = document.getElementById("timer");
 var countdown = document.getElementById("countdown");
+var container = document.querySelector(".container");
 var quizTopic = document.getElementById("topics");
 var ticker = 0;
 var highscores = {};
@@ -11,7 +12,7 @@ var javascript = {
     "topicName": "JavaScript",
     "questions": [{
             "question": "Question 1",
-            "choices": ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
+            "choices": ["Choice 1", "Choice 2", "This will be choice 3", "Choice 4"],
             "correctChoice": 0
         },
         {
@@ -39,7 +40,7 @@ function runTimer() {
     ticker = setInterval(function () {
         if (seconds == 0) {
             console.log("Game over");
-            return;
+            clearInterval(ticker);
         }
         seconds--;
         if (seconds < 11)
@@ -47,13 +48,29 @@ function runTimer() {
         countdown.innerHTML = String(seconds);
     }, 1000);
 }
-function loadTopic(topic) {
-    var filename = topic.toLowerCase().replace(" ", "-") + ".json";
-    console.log(filename);
+function buildQuestion(data) {
+    var element = document.createElement("div");
+    var question = document.createElement("p");
+    var choices = document.createElement("div");
+    choices.className = "choices-block";
+    question.innerText = data.question;
+    for (var i = 0; i < data.choices.length; i++) {
+        console.log(i + 1 + ". " + data.choices[i]);
+        var temp = document.createElement("button");
+        temp.textContent = i + 1 + ". " + data.choices[i];
+        temp.className = "choice";
+        choices.appendChild(temp);
+    }
+    element.appendChild(question);
+    element.appendChild(choices);
+    return element;
 }
 function startGame() {
+    var questions = javascript.questions;
+    var qIndex = 0;
+    container.innerHTML = "";
+    container.appendChild(buildQuestion(questions[qIndex]));
     runTimer();
-    loadTopic("JavaScript");
 }
 startButton.addEventListener("click", startGame);
 function loadPage() {
