@@ -48,19 +48,22 @@ select {
 }
 
 hr {
-	height: 10px;
+	width: 100%;
 }
 
 .container {
 	display: flex;
 	flex-direction: column;
-	width: 50%;
+	width: 55%;
+	min-width: 35rem;
 }
 
 .choices-block {
 	display: grid;
 	grid-template-rows: repeat(4, 1fr);
 	row-gap: 3%;
+	margin-top: 5%;
+	margin-bottom: 5%;
 	/* width: fit-content; */
 }
 	.choices-block .choice {
