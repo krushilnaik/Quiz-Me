@@ -1,7 +1,9 @@
 var startButton = document.getElementById("start");
-var timer = document.getElementById("timer");
-var countdown = document.getElementById("countdown");
-var quizTopic = document.getElementById("topics");
+var timer       = document.getElementById("timer");
+var countdown   = document.getElementById("countdown");
+var container   = document.querySelector(".container");
+var quizTopic   = document.getElementById("topics");
+
 var ticker = 0;
 var highscores = {};
 
@@ -12,7 +14,7 @@ var javascript = {
 	"topicName": "JavaScript",
 	"questions": [{
 			"question": "Question 1",
-			"choices": ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
+			"choices": ["Choice 1", "Choice 2", "This will be choice 3", "Choice 4"],
 			"correctChoice": 0
 		},
 		{
@@ -50,10 +52,9 @@ function runTimer() {
 	}, 1000);
 }
 
-function loadTopic(topic: string) {
-	let filename: string = `${topic.toLowerCase().replace(" ", "-")}.json`;	
-	console.log(filename);
-}
+// function loadTopic(topic: string) {
+// 	let filename: string = `${topic.toLowerCase().replace(" ", "-")}.json`;
+// }
 
 interface QuestionModel {
 	question: string;
@@ -62,7 +63,6 @@ interface QuestionModel {
 }
 
 function buildQuestion(data: QuestionModel): HTMLElement {
-	// console.log(`Building question from model ${data}`);
 	var element = document.createElement("div");
 
 	var question = document.createElement("p");
@@ -88,8 +88,15 @@ function buildQuestion(data: QuestionModel): HTMLElement {
 }
 
 function startGame() {
+	let questions: QuestionModel[] = javascript.questions;
+	let qIndex: number = 0;
+
+	container.innerHTML = "";
+	container.appendChild(
+		buildQuestion(questions[qIndex])
+	);
+
 	runTimer();
-	loadTopic("JavaScript");
 }
 
 startButton.addEventListener("click", startGame);
