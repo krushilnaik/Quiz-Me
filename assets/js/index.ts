@@ -4,8 +4,11 @@ var countdown   = document.getElementById("countdown");
 var container   = document.querySelector(".container");
 var quizTopic   = document.getElementById("topics");
 
-var ticker = 0;
 var highscores = {};
+
+// this will be used in conjunction with runTimer()
+// to make clearInterval callable anywhere in the code
+var ticker = 0;
 
 // I don't wanna use XMLHTTPRqeusts for this just yet
 // and jQuery intellisense isn't working
@@ -61,18 +64,27 @@ function checkAnswer(userChoice: HTMLButtonElement, questionNumber: number) {
 	let choiceIndex: number = Number(userChoice.innerText[0]) - 1;
 	let correctChoice: number = javascript.questions[questionNumber].correctChoice;
 
+	let response: string = "Correct!";
+
 	if (choiceIndex !== correctChoice) {
-		countdown.innerText = String(Number(countdown.innerText) - 5);
+		countdown.innerText = String(Number(countdown.innerText) - 3);
+		response = "Wrong!";
 	}
 
-	if (questionNumber === javascript.questions.length - 1) {
-		return;
-	} else {
-		container.innerHTML = "";
-		container.appendChild(
-			buildQuestion("JavaScript", questionNumber + 1)
-		);
-	}
+	container.appendChild(document.createElement("hr"));
+	container.append(response);
+
+	setTimeout(() => {
+		if (questionNumber === javascript.questions.length - 1) {
+			clearInterval(ticker);
+			return;
+		} else {
+			container.innerHTML = "";
+			container.appendChild(
+				buildQuestion("JavaScript", questionNumber + 1)
+			);
+		}
+	}, 300);
 }
 
 interface QuestionModel {

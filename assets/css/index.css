@@ -47,6 +47,10 @@ select {
 	width: max-content;
 }
 
+hr {
+	height: 10px;
+}
+
 .container {
 	display: flex;
 	flex-direction: column;

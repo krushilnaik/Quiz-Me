@@ -3,8 +3,10 @@ var timer = document.getElementById("timer");
 var countdown = document.getElementById("countdown");
 var container = document.querySelector(".container");
 var quizTopic = document.getElementById("topics");
-var ticker = 0;
 var highscores = {};
+// this will be used in conjunction with runTimer()
+// to make clearInterval callable anywhere in the code
+var ticker = 0;
 // I don't wanna use XMLHTTPRqeusts for this just yet
 // and jQuery intellisense isn't working
 // so just hard code one of the files for now
@@ -55,16 +57,23 @@ function runTimer() {
 function checkAnswer(userChoice, questionNumber) {
     var choiceIndex = Number(userChoice.innerText[0]) - 1;
     var correctChoice = javascript.questions[questionNumber].correctChoice;
+    var response = "Correct!";
     if (choiceIndex !== correctChoice) {
-        countdown.innerText = String(Number(countdown.innerText) - 5);
+        countdown.innerText = String(Number(countdown.innerText) - 3);
+        response = "Wrong!";
     }
-    if (questionNumber === javascript.questions.length - 1) {
-        return;
-    }
-    else {
-        container.innerHTML = "";
-        container.appendChild(buildQuestion("JavaScript", questionNumber + 1));
-    }
+    container.appendChild(document.createElement("hr"));
+    container.append(response);
+    setTimeout(function () {
+        if (questionNumber === javascript.questions.length - 1) {
+            clearInterval(ticker);
+            return;
+        }
+        else {
+            container.innerHTML = "";
+            container.appendChild(buildQuestion("JavaScript", questionNumber + 1));
+        }
+    }, 300);
 }
 function buildQuestion(topicName, questionNumber) {
     console.log("Building " + topicName + " question " + (questionNumber + 1));
