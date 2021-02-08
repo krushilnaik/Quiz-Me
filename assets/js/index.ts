@@ -5,6 +5,7 @@ var container   = document.querySelector(".container");
 var quizTopic   = document.getElementById("topics");
 
 var highscores = {};
+var runningScore: number = 0;
 
 // this will be used in conjunction with runTimer()
 // to make clearInterval callable anywhere in the code
@@ -60,6 +61,55 @@ function runTimer() {
 // 	let filename: string = `${topic.toLowerCase().replace(" ", "-")}.json`;
 // }
 
+function submissionForm() {
+	container.innerHTML = "";
+
+	var completionMessage = document.createElement("h1");
+	completionMessage.innerText = "All done!";
+
+	var scoreMessage = document.createElement("p");
+	scoreMessage.innerText = `Your final score is ${runningScore}`;
+	scoreMessage.className = "score-report";
+
+	var form = document.createElement("div");
+	form.className = "score-submission";
+
+	var input = document.createElement("input");
+	input.name = "initials";
+
+	var label = document.createElement("label");
+	label.htmlFor = "initials";
+	label.innerText = "Enter Initials";
+
+	var submitButton = document.createElement("button");
+	submitButton.innerText = "Submit";
+	submitButton.className = "submit";
+
+	submitButton.addEventListener("click", function(event) {
+		event.preventDefault();
+
+		if (input.value === "") {
+			alert("Please provide initials");
+			return;
+		}
+
+		var highscores = JSON.parse(localStorage.getItem("highscores"));
+
+		highscores[input.value] = runningScore;
+
+		localStorage.setItem("highscores", highscores);
+		window.location.replace("highscores.html");
+	});
+
+	form.appendChild(label);
+	form.appendChild(input);
+	form.appendChild(submitButton);
+
+	container.appendChild(completionMessage);
+	container.appendChild(scoreMessage);
+	container.appendChild(form);
+}
+
 function checkAnswer(userChoice: HTMLButtonElement, questionNumber: number) {
 	let choiceIndex: number = Number(userChoice.innerText[0]) - 1;
 	let correctChoice: number = javascript.questions[questionNumber].correctChoice;
@@ -69,6 +119,8 @@ function checkAnswer(userChoice: HTMLButtonElement, questionNumber: number) {
 	if (choiceIndex !== correctChoice) {
 		countdown.innerText = String(Number(countdown.innerText) - 3);
 		response = "Wrong!";
+	} else {
+		runningScore++;
 	}
 
 	container.appendChild(document.createElement("hr"));
@@ -77,6 +129,7 @@ function checkAnswer(userChoice: HTMLButtonElement, questionNumber: number) {
 	setTimeout(() => {
 		if (questionNumber === javascript.questions.length - 1) {
 			clearInterval(ticker);
+			submissionForm();
 			return;
 		} else {
 			container.innerHTML = "";

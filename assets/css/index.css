@@ -52,6 +52,7 @@ hr {
 	margin-top: 0%;
 }
 
+
 .container {
 	display: flex;
 	flex-direction: column;
@@ -67,9 +68,27 @@ hr {
 	margin-bottom: 5%;
 	/* width: fit-content; */
 }
-	.choices-block .choice {
+	.choices-block .choice, .submit {
 		font-size: .9rem;
 		line-height: 1.1rem;
 		width: fit-content;
 		border-radius: 5px;
+		background-color: darkorchid;
+		color: white;
 	}
+
+input {
+	line-height: 1rem;
+}
+
+.score-submission {
+	display: grid;
+	grid-template-columns: repeat(3, max-content);
+	column-gap: 5px;
+}
+
+.score-report {
+	align-self: flex-start;
+	padding-left: 0%;
+	padding-right: 0%;
+}
