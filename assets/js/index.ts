@@ -20,7 +20,7 @@ var quizQuestions: QuizModel;
 
 /**
  * This will be used in conjunction with setInterval()
- * to make clearInterval callable from anywhere in the code.
+ * to make clearInterval() callable from anywhere in the code.
  */
 var ticker = 0;
 
