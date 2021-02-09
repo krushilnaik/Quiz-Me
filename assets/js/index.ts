@@ -36,9 +36,10 @@ function runTimer() {
 	ticker = setInterval(function () {
 		countdown.innerText = String(Number(countdown.innerText) - 1);
 
-		if (countdown.innerText === "0") {
+		if (Number(countdown.innerText) <= 0) {
 			console.log("Game over");
 			clearInterval(ticker);
+			submissionForm();
 		} else if (Number(countdown.innerText) < 11) {
 			timer.style.color = "crimson";
 		}
