@@ -1,0 +1,55 @@
+{
+	"topicName": "Topic 3",
+	"questions": [
+		{
+			"question": "Which stormtrooper wasn't able to complete his mission in The Force Awakens?",
+			"choices": [
+				"FN-2705",
+				"FN-2187",
+				"FN-1205",
+				"FN-1312"
+			],
+			"correctChoice": 1
+		},
+		{
+			"question": "According to Master Yoda, how many Sith are always out there?",
+			"choices": [
+				"One",
+				"Two",
+				"Three",
+				"Four"
+			],
+			"correctChoice": 1
+		},
+		{
+			"question": "Who killed Jabba?",
+			"choices": [
+				"Han Solo",
+				"Luke Skywalker",
+				"Count Dooku",
+				"Leia Organa"
+			],
+			"correctChoice": 3
+		},
+		{
+			"question": "What is the color of C-3PO's arm in The Force Awakens?",
+			"choices": [
+				"Red",
+				"Yellow",
+				"Blue",
+				"Silver"
+			],
+			"correctChoice": 0
+		},
+		{
+			"question": "What was the job that Finn told Han Solo he had at Starkiller base?",
+			"choices": [
+				"Pilot",
+				"Guard",
+				"Sanitation",
+				"Chef"
+			],
+			"correctChoice": 2
+		}
+	]
+}
