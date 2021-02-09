@@ -40,7 +40,7 @@
 			"choices": [
 				"function = myFunction()",
 				"function myFunction()",
-				"function myFunction()",
+				"myFunction = new Function()",
 				"function:myFunction()"
 			],
 			"correctChoice": 1
