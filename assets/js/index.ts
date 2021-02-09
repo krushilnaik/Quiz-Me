@@ -179,7 +179,6 @@ function startGame() {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				console.log(xhr.responseText);
 
 				// get the JSON opject and put it in a global variable
 				quizQuestions = JSON.parse(xhr.responseText);
