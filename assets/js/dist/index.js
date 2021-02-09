@@ -142,7 +142,6 @@ function startGame() {
  * if it doesn't already exist.
  */
 function loadPage() {
-    // create an empty highscores object if it doesn't exist
     if (localStorage.getItem("highscores") === null) {
         localStorage.setItem("highscores", JSON.stringify({}));
     }
