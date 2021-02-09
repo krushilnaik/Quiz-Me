@@ -2,44 +2,48 @@
 	"topicName": "JavaScript",
 	"questions": [
 		{
-			"question": "Question 1",
-			"choices": [
-				"Choice 1",
-				"Choice 2",
-				"Choice 3",
-				"Choice 4"
-			],
-			"correctChoice": 0
+			"question": "Inside which HTML element do we put the JavaScript?",
+			"choices": ["<javascript>", "<script>", "<js>", "<scripting>"],
+			"correctChoice": 1
 		},
 		{
-			"question": "Question 2",
+			"question": "What is the correct JavaScript syntax to change the content of the HTML element below?\n<p id=\"demo\">This is a demonstration.</p>",
 			"choices": [
-				"Choice 1",
-				"Choice 2",
-				"Choice 3",
-				"Choice 4"
+				"document.getElement(\"p\").innerHTML = \"Hello World!\";",
+				"document.getElementById(\"demo\").innerHTML = \"Hello World!\";",
+				"document.getElementByName(\"p\").innerHTML = \"Hello World!\";",
+				"#demo.innerHTML = \"Hello World!\";"
 			],
 			"correctChoice": 1
 		},
 		{
-			"question": "Question 3",
+			"question": "What is the correct syntax for referring to an external script called \"xxx.js\"?",
 			"choices": [
-				"Choice 1",
-				"Choice 2",
-				"Choice 3",
-				"Choice 4"
+				"<script href=\"xxx.js\">",
+				"<script src=\"xxx.js\">",
+				"<script name=\"xxx.js\">"
+			],
+			"correctChoice": 1
+		},
+		{
+			"question": "How do you write \"Hello World\" in an alert box?",
+			"choices": [
+				"alertBox(\"Hello World!\");",
+				"prompt(\"Hello World!\");",
+				"alert(\"Hello World!\");",
+				"alertLog(\"Hello World!\");"
 			],
 			"correctChoice": 2
 		},
 		{
-			"question": "Question 4",
+			"question": "How do you create a function in JavaScript?",
 			"choices": [
-				"Choice 1",
-				"Choice 2",
-				"Choice 3",
-				"Choice 4"
+				"function = myFunction()",
+				"function myFunction()",
+				"function myFunction()",
+				"function:myFunction()"
 			],
-			"correctChoice": 3
+			"correctChoice": 1
 		}
 	]
 }
