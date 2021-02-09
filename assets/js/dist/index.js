@@ -7,7 +7,7 @@ var runningScore = 0;
 var quizQuestions;
 /**
  * This will be used in conjunction with setInterval()
- * to make clearInterval callable from anywhere in the code.
+ * to make clearInterval() callable from anywhere in the code.
  */
 var ticker = 0;
 /**
@@ -124,7 +124,6 @@ function startGame() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
-                console.log(xhr.responseText);
                 // get the JSON opject and put it in a global variable
                 quizQuestions = JSON.parse(xhr.responseText);
                 // clear the page and show the first question
