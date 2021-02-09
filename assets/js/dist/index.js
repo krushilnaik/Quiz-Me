@@ -3,49 +3,45 @@ var timer = document.getElementById("timer");
 var countdown = document.getElementById("countdown");
 var container = document.querySelector(".container");
 var quizTopic = document.querySelector("select");
-var highscores = {};
 var runningScore = 0;
 var quizQuestions;
-// this will be used in conjunction with runTimer()
-// to make clearInterval callable anywhere in the code
+/**
+ * This will be used in conjunction with setInterval()
+ * to make clearInterval callable from anywhere in the code.
+ */
 var ticker = 0;
 /**
- * Run the countdown when the player hits start
+ * Run the countdown when the player hits start.
  */
 function runTimer() {
     clearInterval(ticker);
     timer.style.color = "green";
     countdown.innerText = "60";
-    var seconds = Number(countdown.innerText);
     ticker = setInterval(function () {
-        seconds--;
-        if (seconds == 0) {
+        countdown.innerText = String(Number(countdown.innerText) - 1);
+        if (countdown.innerText === "0") {
             console.log("Game over");
             clearInterval(ticker);
         }
-        if (seconds < 11)
+        else if (Number(countdown.innerText) < 11) {
             timer.style.color = "crimson";
-        countdown.innerHTML = String(seconds);
+        }
+        countdown.innerHTML = String(countdown.innerText);
     }, 1000);
 }
 /**
  * Generate a form for the player to enter their initials
- * and have their score be added to the highscores page
+ * and have their score be added to the highscores page.
  */
 function submissionForm() {
+    // reset element
     container.innerHTML = "";
-    var completionMessage = document.createElement("h1");
-    completionMessage.innerText = "All done!";
-    var scoreMessage = document.createElement("p");
-    scoreMessage.innerText = "Your final score is " + runningScore;
-    scoreMessage.className = "score-report";
-    var form = document.createElement("div");
-    form.className = "score-submission";
-    var input = document.createElement("input");
-    input.name = "initials";
-    var label = document.createElement("label");
-    label.htmlFor = "initials";
-    label.innerText = "Enter Initials";
+    // build the "form"
+    container.innerHTML += "<h1>All done!</h1>";
+    container.innerHTML += "<p class='score-report'>Your final score is " + runningScore + "</p>";
+    container.innerHTML += "\n\t\t<div class=\"score-submission\">\n\t\t\t<label for=\"initials\">Enter Initials</label>\n\t\t\t<input type=\"text\" name=\"initials\">\n\t\t</div>\n\t";
+    var form = container.querySelector(".score-submission");
+    var input = form.querySelector("input");
     var submitButton = document.createElement("button");
     submitButton.innerText = "Submit";
     submitButton.className = "submit";
@@ -60,15 +56,11 @@ function submissionForm() {
         localStorage.setItem("highscores", JSON.stringify(highscores));
         window.location.replace("highscores.html");
     });
-    form.appendChild(label);
-    form.appendChild(input);
     form.appendChild(submitButton);
-    container.appendChild(completionMessage);
-    container.appendChild(scoreMessage);
     container.appendChild(form);
 }
 /**
- * Check the player's choice against the answer key
+ * Check the player's choice against the answer key.
  * @param userChoice which choice the user clicked on
  * @param questionNumber what question number they're on
  */
@@ -77,7 +69,7 @@ function checkAnswer(userChoice, questionNumber) {
     var correctChoice = quizQuestions.questions[questionNumber].correctChoice;
     var response = "Correct!";
     if (choiceIndex !== correctChoice) {
-        countdown.innerText = String(Number(countdown.innerText) - 3);
+        countdown.innerText = String(Number(countdown.innerText) - 10);
         response = "Wrong!";
     }
     else {
@@ -98,16 +90,15 @@ function checkAnswer(userChoice, questionNumber) {
     }, 300);
 }
 /**
- * Render the question and its choices into the DOM
+ * Render the question and its choices into the DOM.
  * @param questionNumber the question number the player is on
  */
 function buildQuestion(questionNumber) {
     var element = document.createElement("div");
     var currentQuestion = quizQuestions.questions[questionNumber];
-    var questionElement = document.createElement("p");
+    element.innerHTML = "\n\t\t<p>" + currentQuestion.question + "</p>\n\t";
     var choices = document.createElement("div");
     choices.className = "choices-block";
-    questionElement.innerText = currentQuestion.question;
     for (var i = 0; i < currentQuestion.choices.length; i++) {
         var choice = document.createElement("button");
         choice.textContent = i + 1 + ". " + currentQuestion.choices[i];
@@ -115,12 +106,11 @@ function buildQuestion(questionNumber) {
         choice.addEventListener("click", function () { checkAnswer(this, questionNumber); });
         choices.appendChild(choice);
     }
-    element.appendChild(questionElement);
     element.appendChild(choices);
     return element;
 }
 /**
- * Look at the selected topic and build the quiz
+ * Look at the selected topic and build the quiz.
  */
 function startGame() {
     var topic = quizTopic.options[quizTopic.selectedIndex].value;
@@ -142,17 +132,16 @@ function startGame() {
     xhr.send();
 }
 /**
- * initialize highscores in localStorage
- * if it doesn't already exist
+ * Initialize highscores in localStorage
+ * if it doesn't already exist.
  */
 function loadPage() {
     if (localStorage.getItem("highscores") === null) {
         localStorage.setItem("highscores", JSON.stringify({}));
     }
-    highscores = JSON.parse(localStorage.getItem("highscores"));
 }
 /**
- * Main Code starts here
+ * Main Code starts here.
  */
 startButton.addEventListener("click", startGame);
 loadPage();

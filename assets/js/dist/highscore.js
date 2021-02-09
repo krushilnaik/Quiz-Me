@@ -14,13 +14,7 @@ function loadScores() {
     var scoreList = document.createElement("ol");
     for (var _i = 0, _a = Object.entries(scores); _i < _a.length; _i++) {
         var _b = _a[_i], player = _b[0], score = _b[1];
-        console.log(player, score);
-        var listItem = document.createElement("li");
-        var temp = document.createElement("div");
-        temp.className = "score";
-        temp.innerText = player + " - " + score;
-        listItem.appendChild(temp);
-        scoreList.appendChild(listItem);
+        scoreList.innerHTML += "\n\t\t\t<li class=\"score\">" + player + " - " + score + "</li>\n\t\t";
     }
     scoresElement.appendChild(scoreList);
 }
