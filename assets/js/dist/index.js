@@ -9,6 +9,9 @@ var quizQuestions;
 // this will be used in conjunction with runTimer()
 // to make clearInterval callable anywhere in the code
 var ticker = 0;
+/**
+ * Run the countdown when the player hits start
+ */
 function runTimer() {
     clearInterval(ticker);
     timer.style.color = "green";
@@ -25,6 +28,10 @@ function runTimer() {
         countdown.innerHTML = String(seconds);
     }, 1000);
 }
+/**
+ * Generate a form for the player to enter their initials
+ * and have their score be added to the highscores page
+ */
 function submissionForm() {
     container.innerHTML = "";
     var completionMessage = document.createElement("h1");
@@ -60,6 +67,11 @@ function submissionForm() {
     container.appendChild(scoreMessage);
     container.appendChild(form);
 }
+/**
+ * Check the player's choice against the answer key
+ * @param userChoice which choice the user clicked on
+ * @param questionNumber what question number they're on
+ */
 function checkAnswer(userChoice, questionNumber) {
     var choiceIndex = Number(userChoice.innerText[0]) - 1;
     var correctChoice = quizQuestions.questions[questionNumber].correctChoice;
@@ -85,6 +97,10 @@ function checkAnswer(userChoice, questionNumber) {
         }
     }, 300);
 }
+/**
+ * Render the question and its choices into the DOM
+ * @param questionNumber the question number the player is on
+ */
 function buildQuestion(questionNumber) {
     var element = document.createElement("div");
     var currentQuestion = quizQuestions.questions[questionNumber];
@@ -103,6 +119,9 @@ function buildQuestion(questionNumber) {
     element.appendChild(choices);
     return element;
 }
+/**
+ * Look at the selected topic and build the quiz
+ */
 function startGame() {
     var topic = quizTopic.options[quizTopic.selectedIndex].value;
     var filename = topic.toLowerCase().replace(/ /g, "-") + ".json";
@@ -122,11 +141,18 @@ function startGame() {
     xhr.open("GET", "assets/json/" + filename);
     xhr.send();
 }
+/**
+ * initialize highscores in localStorage
+ * if it doesn't already exist
+ */
 function loadPage() {
     if (localStorage.getItem("highscores") === null) {
         localStorage.setItem("highscores", JSON.stringify({}));
     }
     highscores = JSON.parse(localStorage.getItem("highscores"));
 }
+/**
+ * Main Code starts here
+ */
 startButton.addEventListener("click", startGame);
 loadPage();

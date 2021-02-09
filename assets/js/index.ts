@@ -23,6 +23,9 @@ var quizQuestions: QuizModel;
 // to make clearInterval callable anywhere in the code
 var ticker = 0;
 
+/**
+ * Run the countdown when the player hits start
+ */
 function runTimer() {
 	clearInterval(ticker);
 	timer.style.color = "green";
@@ -40,6 +43,10 @@ function runTimer() {
 	}, 1000);
 }
 
+/**
+ * Generate a form for the player to enter their initials
+ * and have their score be added to the highscores page
+ */
 function submissionForm() {
 	container.innerHTML = "";
 
@@ -89,6 +96,11 @@ function submissionForm() {
 	container.appendChild(form);
 }
 
+/**
+ * Check the player's choice against the answer key
+ * @param userChoice which choice the user clicked on
+ * @param questionNumber what question number they're on
+ */
 function checkAnswer(userChoice: HTMLButtonElement, questionNumber: number) {
 	let choiceIndex: number = Number(userChoice.innerText[0]) - 1;
 	let correctChoice: number = quizQuestions.questions[questionNumber].correctChoice;
@@ -119,6 +131,11 @@ function checkAnswer(userChoice: HTMLButtonElement, questionNumber: number) {
 	}, 300);
 }
 
+
+/**
+ * Render the question and its choices into the DOM
+ * @param questionNumber the question number the player is on
+ */
 function buildQuestion(questionNumber: number): HTMLElement {
 	var element = document.createElement("div");
 
@@ -146,6 +163,9 @@ function buildQuestion(questionNumber: number): HTMLElement {
 	return element;
 }
 
+/**
+ * Look at the selected topic and build the quiz
+ */
 function startGame() {
 	let topic: string = quizTopic.options[quizTopic.selectedIndex].value;
 	let filename: string = `${topic.toLowerCase().replace(/ /g, "-")}.json`;
@@ -174,6 +194,10 @@ function startGame() {
 	xhr.send();
 }
 
+/**
+ * initialize highscores in localStorage
+ * if it doesn't already exist
+ */
 function loadPage() {
 	if (localStorage.getItem("highscores") === null) {
 		localStorage.setItem("highscores", JSON.stringify({}));
@@ -181,6 +205,9 @@ function loadPage() {
 	highscores = JSON.parse(localStorage.getItem("highscores"));
 }
 
-startButton.addEventListener("click", startGame);
 
+/**
+ * Main Code starts here
+ */
+startButton.addEventListener("click", startGame);
 loadPage();
