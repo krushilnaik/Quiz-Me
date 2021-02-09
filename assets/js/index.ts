@@ -19,12 +19,14 @@ var highscores = {};
 var runningScore: number = 0;
 var quizQuestions: QuizModel;
 
-// this will be used in conjunction with runTimer()
-// to make clearInterval callable anywhere in the code
+/**
+ * This will be used in conjunction with setInterval()
+ * to make clearInterval callable from anywhere in the code.
+ */
 var ticker = 0;
 
 /**
- * Run the countdown when the player hits start
+ * Run the countdown when the player hits start.
  */
 function runTimer() {
 	clearInterval(ticker);
@@ -43,11 +45,13 @@ function runTimer() {
 	}, 1000);
 }
 
+
 /**
  * Generate a form for the player to enter their initials
- * and have their score be added to the highscores page
+ * and have their score be added to the highscores page.
  */
 function submissionForm() {
+	// reset element
 	container.innerHTML = "";
 
 	var completionMessage = document.createElement("h1");
@@ -96,8 +100,9 @@ function submissionForm() {
 	container.appendChild(form);
 }
 
+
 /**
- * Check the player's choice against the answer key
+ * Check the player's choice against the answer key.
  * @param userChoice which choice the user clicked on
  * @param questionNumber what question number they're on
  */
@@ -133,7 +138,7 @@ function checkAnswer(userChoice: HTMLButtonElement, questionNumber: number) {
 
 
 /**
- * Render the question and its choices into the DOM
+ * Render the question and its choices into the DOM.
  * @param questionNumber the question number the player is on
  */
 function buildQuestion(questionNumber: number): HTMLElement {
@@ -163,8 +168,9 @@ function buildQuestion(questionNumber: number): HTMLElement {
 	return element;
 }
 
+
 /**
- * Look at the selected topic and build the quiz
+ * Look at the selected topic and build the quiz.
  */
 function startGame() {
 	let topic: string = quizTopic.options[quizTopic.selectedIndex].value;
@@ -194,9 +200,10 @@ function startGame() {
 	xhr.send();
 }
 
+
 /**
- * initialize highscores in localStorage
- * if it doesn't already exist
+ * Initialize highscores in localStorage
+ * if it doesn't already exist.
  */
 function loadPage() {
 	if (localStorage.getItem("highscores") === null) {
@@ -207,7 +214,7 @@ function loadPage() {
 
 
 /**
- * Main Code starts here
+ * Main Code starts here.
  */
 startButton.addEventListener("click", startGame);
 loadPage();
