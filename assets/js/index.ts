@@ -15,7 +15,6 @@ interface QuizModel {
 	questions: QuestionModel[];
 }
 
-var highscores = {};
 var runningScore: number = 0;
 var quizQuestions: QuizModel;
 
@@ -30,18 +29,21 @@ var ticker = 0;
  */
 function runTimer() {
 	clearInterval(ticker);
+
 	timer.style.color = "green";
 	countdown.innerText = "60";
-	let seconds = Number(countdown.innerText);
+
 	ticker = setInterval(function () {
-		seconds--;
-		if (seconds == 0) {
+		countdown.innerText = String(Number(countdown.innerText) - 1);
+
+		if (countdown.innerText === "0") {
 			console.log("Game over");
 			clearInterval(ticker);
-		}
-		if (seconds < 11)
+		} else if (Number(countdown.innerText) < 11) {
 			timer.style.color = "crimson";
-		countdown.innerHTML = String(seconds);
+		}
+
+		countdown.innerHTML = String(countdown.innerText);
 	}, 1000);
 }
 
@@ -54,22 +56,18 @@ function submissionForm() {
 	// reset element
 	container.innerHTML = "";
 
-	var completionMessage = document.createElement("h1");
-	completionMessage.innerText = "All done!";
+	// build the "form"
+	container.innerHTML += "<h1>All done!</h1>";
+	container.innerHTML += `<p class='score-report'>Your final score is ${runningScore}</p>`;
+	container.innerHTML += `
+		<div class="score-submission">
+			<label for="initials">Enter Initials</label>
+			<input type="text" name="initials">
+		</div>
+	`;
 
-	var scoreMessage = document.createElement("p");
-	scoreMessage.innerText = `Your final score is ${runningScore}`;
-	scoreMessage.className = "score-report";
-
-	var form = document.createElement("div");
-	form.className = "score-submission";
-
-	var input = document.createElement("input");
-	input.name = "initials";
-
-	var label = document.createElement("label");
-	label.htmlFor = "initials";
-	label.innerText = "Enter Initials";
+	var form = container.querySelector(".score-submission");
+	var input = form.querySelector("input");
 
 	var submitButton = document.createElement("button");
 	submitButton.innerText = "Submit";
@@ -91,12 +89,7 @@ function submissionForm() {
 		window.location.replace("highscores.html");
 	});
 
-	form.appendChild(label);
-	form.appendChild(input);
 	form.appendChild(submitButton);
-
-	container.appendChild(completionMessage);
-	container.appendChild(scoreMessage);
 	container.appendChild(form);
 }
 
@@ -145,12 +138,12 @@ function buildQuestion(questionNumber: number): HTMLElement {
 	var element = document.createElement("div");
 
 	var currentQuestion: QuestionModel = quizQuestions.questions[questionNumber];
+	element.innerHTML = `
+		<p>${currentQuestion.question}</p>
+	`;
 
-	var questionElement = document.createElement("p");
 	var choices = document.createElement("div");
 	choices.className = "choices-block";
-
-	questionElement.innerText = currentQuestion.question;
 
 	for (let i = 0; i < currentQuestion.choices.length; i++) {
 		let choice = document.createElement("button");
@@ -162,7 +155,6 @@ function buildQuestion(questionNumber: number): HTMLElement {
 		choices.appendChild(choice);
 	}
 
-	element.appendChild(questionElement);
 	element.appendChild(choices);
 
 	return element;
@@ -209,7 +201,6 @@ function loadPage() {
 	if (localStorage.getItem("highscores") === null) {
 		localStorage.setItem("highscores", JSON.stringify({}));
 	}
-	highscores = JSON.parse(localStorage.getItem("highscores"));
 }
 
 

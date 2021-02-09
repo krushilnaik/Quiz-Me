@@ -19,15 +19,9 @@ function loadScores() {
 	var scoreList = document.createElement("ol");
 
 	for (const [player, score] of Object.entries(scores)) {
-		console.log(player, score);
-		var listItem = document.createElement("li");
-
-		var temp = document.createElement("div");
-		temp.className = "score";
-		temp.innerText = `${player} - ${score}`;
-
-		listItem.appendChild(temp);
-		scoreList.appendChild(listItem);
+		scoreList.innerHTML += `
+			<li class="score">${player} - ${score}</li>
+		`;
 	}
 
 	scoresElement.appendChild(scoreList);
