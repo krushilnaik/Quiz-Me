@@ -113,7 +113,7 @@ function checkAnswer(userChoice: HTMLButtonElement, questionNumber: number) {
 	let response: string = "Correct!";
 
 	if (choiceIndex !== correctChoice) {
-		countdown.innerText = String(Number(countdown.innerText) - 3);
+		countdown.innerText = String(Number(countdown.innerText) - 10);
 		response = "Wrong!";
 	} else {
 		runningScore++;
