@@ -5,6 +5,8 @@
 
 :root {
 	font-size: 23px;
+	--quiz-red: #cd5c5c;
+	--quiz-red-alt: #e06464;
 }
 
 body {
@@ -17,4 +19,8 @@ body {
 	width: 100vw;
 	height: 100vh;
 	max-width: 100%;
+}
+
+button:hover {
+	cursor: pointer;
 }

@@ -14,7 +14,7 @@ ol {
 
 button {
 	border-radius: 5px;
-	background-color: #663399;
+	background-color: #993333;
 	color: white;
 	border: none;
 	font-size: 20px;
@@ -32,8 +32,8 @@ button {
 	margin-bottom: 2%;
 }
 	#scores ol li:nth-child(odd) {
-		background-color: #ffc1f7;
+		background-color: var(--quiz-red-alt);
 	}
 	#scores ol li:nth-child(even) {
-		background-color: #ff9dff;
+		background-color: var(--quiz-red);
 	}

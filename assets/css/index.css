@@ -20,15 +20,21 @@ main {
 	}
 
 #start {
-	line-height: 2rem;
+	padding-top: .5%;
+	padding-bottom: .5%;
 	font-size: 1rem;
 	border-radius: .6rem;
-	border: solid 3px indianred;
+	border: solid 3px var(--quiz-red-alt);
 	align-self: center;
 	outline: none;
+	transition: .15s;
+	user-select: none;
 }
 	#start:hover {
 		cursor: pointer;
+		background-color: var(--quiz-red-alt);
+		color: aliceblue;
+		border: solid 3px var(--quiz-red);
 	}
 
 p {
@@ -42,11 +48,17 @@ a {
 }
 
 select {
-	height: 1.5rem;
 	margin-bottom: 1%;
+	padding: .6%;
 	align-self: center;
-	width: max-content;
+	background-color: var(--quiz-red);
+	border-radius: 5px;
+	color: aliceblue;
+	font-size: 20px;
 }
+	select option:nth-child(even) {
+		background-color: var(--quiz-red-alt);
+	}
 
 hr {
 	width: 100%;
@@ -74,7 +86,7 @@ hr {
 		line-height: 1.1rem;
 		width: fit-content;
 		border-radius: 5px;
-		background-color: darkorchid;
+		background-color: var(--quiz-red);
 		color: white;
 	}
 
