@@ -42,6 +42,7 @@ function submissionForm() {
     container.innerHTML += "\n\t\t<div class=\"score-submission\">\n\t\t\t<label for=\"initials\">Enter Initials</label>\n\t\t\t<input type=\"text\" name=\"initials\">\n\t\t</div>\n\t";
     var form = container.querySelector(".score-submission");
     var input = form.querySelector("input");
+    // add "submit score" button
     var submitButton = document.createElement("button");
     submitButton.innerText = "Submit";
     submitButton.className = "submit";
@@ -54,6 +55,7 @@ function submissionForm() {
         var highscores = JSON.parse(localStorage.getItem("highscores"));
         highscores[input.value] = runningScore;
         localStorage.setItem("highscores", JSON.stringify(highscores));
+        // redirect player to the highscores page
         window.location.replace("highscores.html");
     });
     form.appendChild(submitButton);
@@ -69,7 +71,8 @@ function checkAnswer(userChoice, questionNumber) {
     var correctChoice = quizQuestions.questions[questionNumber].correctChoice;
     var response = "Correct!";
     if (choiceIndex !== correctChoice) {
-        countdown.innerText = String(Number(countdown.innerText) - 10);
+        // chop off nine seconds, plus theh one from the regular countdown
+        countdown.innerText = String(Number(countdown.innerText) - 9);
         response = "Wrong!";
     }
     else {
@@ -99,6 +102,7 @@ function buildQuestion(questionNumber) {
     element.innerHTML = "\n\t\t<p>" + currentQuestion.question + "</p>\n\t";
     var choices = document.createElement("div");
     choices.className = "choices-block";
+    // populate the multiple choices on the question page
     for (var i = 0; i < currentQuestion.choices.length; i++) {
         var choice = document.createElement("button");
         choice.textContent = i + 1 + ". " + currentQuestion.choices[i];
@@ -115,19 +119,22 @@ function buildQuestion(questionNumber) {
 function startGame() {
     var topic = quizTopic.options[quizTopic.selectedIndex].value;
     var filename = topic.toLowerCase().replace(/ /g, "-") + ".json";
-    console.log(filename);
     var xhr = new XMLHttpRequest();
+    // try pulling the quiz file corresponding to the selected topic
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
                 console.log(xhr.responseText);
+                // get the JSON opject and put it in a global variable
                 quizQuestions = JSON.parse(xhr.responseText);
+                // clear the page and show the first question
                 container.innerHTML = "";
                 container.appendChild(buildQuestion(0));
                 runTimer();
             }
         }
     };
+    // write and send the request
     xhr.open("GET", "assets/json/" + filename);
     xhr.send();
 }
@@ -136,6 +143,7 @@ function startGame() {
  * if it doesn't already exist.
  */
 function loadPage() {
+    // create an empty highscores object if it doesn't exist
     if (localStorage.getItem("highscores") === null) {
         localStorage.setItem("highscores", JSON.stringify({}));
     }

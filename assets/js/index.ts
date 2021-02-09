@@ -69,6 +69,7 @@ function submissionForm() {
 	var form = container.querySelector(".score-submission");
 	var input = form.querySelector("input");
 
+	// add "submit score" button
 	var submitButton = document.createElement("button");
 	submitButton.innerText = "Submit";
 	submitButton.className = "submit";
@@ -86,6 +87,8 @@ function submissionForm() {
 		highscores[input.value] = runningScore;
 
 		localStorage.setItem("highscores", JSON.stringify(highscores));
+
+		// redirect player to the highscores page
 		window.location.replace("highscores.html");
 	});
 
@@ -106,7 +109,8 @@ function checkAnswer(userChoice: HTMLButtonElement, questionNumber: number) {
 	let response: string = "Correct!";
 
 	if (choiceIndex !== correctChoice) {
-		countdown.innerText = String(Number(countdown.innerText) - 10);
+		// chop off nine seconds, plus theh one from the regular countdown
+		countdown.innerText = String(Number(countdown.innerText) - 9);
 		response = "Wrong!";
 	} else {
 		runningScore++;
@@ -145,6 +149,7 @@ function buildQuestion(questionNumber: number): HTMLElement {
 	var choices = document.createElement("div");
 	choices.className = "choices-block";
 
+	// populate the multiple choices on the question page
 	for (let i = 0; i < currentQuestion.choices.length; i++) {
 		let choice = document.createElement("button");
 		choice.textContent = `${i+1}. ${currentQuestion.choices[i]}`;
@@ -167,17 +172,19 @@ function buildQuestion(questionNumber: number): HTMLElement {
 function startGame() {
 	let topic: string = quizTopic.options[quizTopic.selectedIndex].value;
 	let filename: string = `${topic.toLowerCase().replace(/ /g, "-")}.json`;
-	console.log(filename);
 
 	var xhr = new XMLHttpRequest();
 
+	// try pulling the quiz file corresponding to the selected topic
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				console.log(xhr.responseText);
 
+				// get the JSON opject and put it in a global variable
 				quizQuestions = JSON.parse(xhr.responseText);
 
+				// clear the page and show the first question
 				container.innerHTML = "";
 				container.appendChild(
 					buildQuestion(0)
@@ -188,6 +195,7 @@ function startGame() {
 		}
 	}
 
+	// write and send the request
 	xhr.open("GET", `assets/json/${filename}`);
 	xhr.send();
 }
@@ -198,6 +206,7 @@ function startGame() {
  * if it doesn't already exist.
  */
 function loadPage() {
+	// create an empty highscores object if it doesn't exist
 	if (localStorage.getItem("highscores") === null) {
 		localStorage.setItem("highscores", JSON.stringify({}));
 	}
