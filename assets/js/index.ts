@@ -6,6 +6,7 @@ var quizTopic   = document.getElementById("topics");
 
 var highscores = {};
 var runningScore: number = 0;
+var quizQuestions: QuizModel;
 
 // this will be used in conjunction with runTimer()
 // to make clearInterval callable anywhere in the code
@@ -97,7 +98,7 @@ function submissionForm() {
 
 		highscores[input.value] = runningScore;
 
-		localStorage.setItem("highscores", highscores);
+		localStorage.setItem("highscores", JSON.stringify(highscores));
 		window.location.replace("highscores.html");
 	});
 
