@@ -1,0 +1,55 @@
+{
+	"topicName": "Harry Potter",
+	"questions": [
+		{
+			"question": "What is the first name of Professor McGonagall?",
+			"choices": [
+				"Maisey",
+				"Minerva",
+				"Mabel",
+				"Marilyn"
+			],
+			"correctChoice": 1
+		},
+		{
+			"question": "Who was the Half-Blood Prince?",
+			"choices": [
+				"Alastor Moody",
+				"Tom Riddle",
+				"Severus Snape",
+				"Albus Dumbledore"
+			],
+			"correctChoice": 2
+		},
+		{
+			"question": "What is a Muggle?",
+			"choices": [
+				"Someone who's really bad at magic",
+				"A normal person",
+				"A wizard/witch from a normal family",
+				"A wizard/witch born of a wizard/witch and a normal person"
+			],
+			"correctChoice": 1
+		},
+		{
+			"question": "How are parcels and letters sent in the wizarding world?",
+			"choices": [
+				"Owl",
+				"Floo network",
+				"Goblin",
+				"Mailmen"
+			],
+			"correctChoice": 0
+		},
+		{
+			"question": "Which Hogwarts student says, \"Just because you've got the emotional range of a teaspoon doesn't mean we all have\"?",
+			"choices": [
+				"Ginny Weasley",
+				"Hermione Granger",
+				"Luna Lovegood",
+				"Lavender Brown"
+			],
+			"correctChoice": 1
+		}
+	]
+}
