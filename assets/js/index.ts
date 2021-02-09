@@ -43,7 +43,7 @@ var javascript = {
 function runTimer() {
 	clearInterval(ticker);
 	timer.style.color = "green";
-	countdown.innerText = "16";
+	countdown.innerText = "60";
 	let seconds = Number(countdown.innerText);
 	ticker = setInterval(function () {
 		seconds--;
