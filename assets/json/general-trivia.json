@@ -1,0 +1,55 @@
+{
+	"topicName": "General Trivia",
+	"questions": [
+		{
+			"question": "Which of the following is the largest amongst themselves?",
+			"choices": [
+				"Star",
+				"Galaxy",
+				"Proton",
+				"Bear"
+			],
+			"correctChoice": 1
+		},
+		{
+			"question": "How many eyes does a Cylops have?",
+			"choices": [
+				"One",
+				"Two",
+				"Three",
+				"Four"
+			],
+			"correctChoice": 0
+		},
+		{
+			"question": "Pick the answer that contains three months when summer traditionally occurs.",
+			"choices": [
+				"March, April, May",
+				"December, January, February",
+				"June, July, August",
+				"September, October, November"
+			],
+			"correctChoice": 2
+		},
+		{
+			"question": "What is a 20% tip on a $46 bill?",
+			"choices": [
+				"$20",
+				"$8.60",
+				"$9.20",
+				"$6.90"
+			],
+			"correctChoice": 2
+		},
+		{
+			"question": "Which of the following animals is not nocturnal?",
+			"choices": [
+				"Rabbit",
+				"Koala",
+				"Bat",
+				"Raccoon"
+			],
+			"correctChoice": 0
+		}
+	]
+}
