@@ -8,6 +8,7 @@ ol {
 	margin: 0%;
 }
 	ol li {
+		list-style-position: inside;
 		padding: .5%;
 	}
 
@@ -30,9 +31,9 @@ button {
 	width: 35em;
 	margin-bottom: 2%;
 }
-	#scores:nth-child(even) {
+	#scores ol li:nth-child(odd) {
 		background-color: #ffc1f7;
 	}
-	#scores:nth-child(odd) {
-		background-color: violet;
+	#scores ol li:nth-child(even) {
+		background-color: #ff9dff;
 	}

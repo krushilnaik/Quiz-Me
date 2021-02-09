@@ -25,6 +25,7 @@ main {
 	border-radius: .6rem;
 	border: solid 3px indianred;
 	align-self: center;
+	outline: none;
 }
 	#start:hover {
 		cursor: pointer;
