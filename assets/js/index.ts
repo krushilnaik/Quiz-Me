@@ -154,9 +154,8 @@ function buildQuestion(questionNumber: number): HTMLElement {
 	var element = document.createElement("div");
 
 	var currentQuestion: QuestionModel = quizQuestions.questions[questionNumber];
-	element.innerHTML = `
-		<p>${currentQuestion.question}</p>
-	`;
+	var element = document.createElement("p");
+	element.innerText = currentQuestion.question;
 
 	var choices = document.createElement("div");
 	choices.className = "choices-block";
