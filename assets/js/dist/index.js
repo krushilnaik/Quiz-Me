@@ -62,7 +62,7 @@ function submissionForm() {
             highscores = storedScores.split(",");
         }
         var topic = quizTopic.options[quizTopic.selectedIndex].value;
-        highscores.push("Quiz '" + topic + "': " + input.value + " - " + runningScore);
+        highscores.push("'" + topic + "': " + input.value + " - " + runningScore);
         localStorage.setItem("highscores", highscores.toString());
         // redirect player to the highscores page
         window.location.replace("highscores.html");

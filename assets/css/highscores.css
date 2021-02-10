@@ -4,14 +4,6 @@ main {
 	height: 100%;
 }
 
-ol {
-	margin: 0%;
-}
-	ol li {
-		list-style-position: inside;
-		padding: .5%;
-	}
-
 button {
 	border-radius: 5px;
 	background-color: #993333;
@@ -31,9 +23,50 @@ button {
 	width: 35em;
 	margin-bottom: 2%;
 }
-	#scores ol li:nth-child(odd) {
-		background-color: var(--quiz-red-alt);
+
+.score-board {
+	background-color: indianred;
+	padding: 1%;
+	border-radius: 8px;
+	color: honeydew;
+}
+
+.quiz-group {
+	margin: 2%;
+}
+
+.quiz-topic {
+	width: fit-content;
+	background-color: tomato;
+	padding: .5% 1%;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	border-bottom: dashed 1px #bd6157;
+}
+
+.score-group {
+	padding: .8%;
+	background-color: tomato;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 1%;
+}
+	.score-group:nth-child(odd) {
+		background-color: #ff7e67;
 	}
-	#scores ol li:nth-child(even) {
-		background-color: var(--quiz-red);
+	.score-group:last-child {
+		border-bottom-left-radius: 8px;
+		border-bottom-right-radius: 8px;
 	}
+	.score-group span {
+		width: fit-content;
+		justify-self: center;
+	}
+
+.initials::before {
+	content: "Player: ";
+}
+
+.score::before {
+	content: "Score: ";
+}

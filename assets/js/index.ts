@@ -94,7 +94,7 @@ function submissionForm() {
 
 		let topic: string = quizTopic.options[quizTopic.selectedIndex].value;
 
-		highscores.push(`Quiz '${topic}': ${input.value} - ${runningScore}`);
+		highscores.push(`'${topic}': ${input.value} - ${runningScore}`);
 
 		localStorage.setItem("highscores", highscores.toString());
 

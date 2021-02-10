@@ -1,3 +1,6 @@
+// Backup highscores
+// 
+// Quiz 'JavaScript': KN - 5,Quiz 'Star Wars': KN - 5,Quiz 'JavaScript': KN - 3,Quiz 'JavaScript': RDJ - 5,Quiz 'Marvel Cinematic Universe': RDJ - 0,Quiz 'Marvel Cinematic Universe': KN - 5
 var scoresElement = document.getElementById("scores");
 function loadScores() {
     scoresElement.innerHTML = "";
@@ -8,7 +11,7 @@ function loadScores() {
     }
     var scores = localStorage.getItem("highscores")
         .split(",").map(function (rawString) {
-        var regex = /^(.+): (.+) - ([0-5])$/;
+        var regex = /^'(.+)': (.+) - ([0-5])$/;
         var groups = rawString.split(regex).filter(function (str) { return str !== ""; });
         return {
             quizName: groups[0],
@@ -33,12 +36,27 @@ function loadScores() {
         console.log("No scores found.");
         return;
     }
-    var scoreList = document.createElement("ol");
+    var scoreBoard = document.createElement("div");
+    scoreBoard.className = "score-board";
+    var quizGroup = document.createElement("div");
+    quizGroup.className = "quiz-group";
+    var currentQuiz = "";
     for (var _i = 0, scores_1 = scores; _i < scores_1.length; _i++) {
         var score = scores_1[_i];
-        scoreList.innerHTML += "\n\t\t\t<li class=\"score\">" + score.quizName + ": " + score.initials + " - " + score.score + "</li>\n\t\t";
+        console.log(score);
+        if (currentQuiz !== score.quizName) {
+            currentQuiz = score.quizName;
+            scoreBoard.appendChild(quizGroup);
+            quizGroup = document.createElement("div");
+            quizGroup.className = "quiz-group";
+            quizGroup.innerHTML += "<div class=\"quiz-topic\">" + score.quizName + "</div>";
+        }
+        var scoreGroup = document.createElement("div");
+        scoreGroup.className = "score-group";
+        scoreGroup.innerHTML = "\n\t\t\t<span class=\"initials\">" + score.initials + "</span>\n\t\t\t<span class=\"score\">" + score.score + "</span>\n\t\t";
+        quizGroup.appendChild(scoreGroup);
     }
-    scoresElement.appendChild(scoreList);
+    scoresElement.appendChild(scoreBoard);
 }
 function clearScores() {
     localStorage.setItem("highscores", "");

@@ -4,6 +4,10 @@ interface ScoreModel {
 	score: number;
 }
 
+// Backup highscores
+// 
+// Quiz 'JavaScript': KN - 5,Quiz 'Star Wars': KN - 5,Quiz 'JavaScript': KN - 3,Quiz 'JavaScript': RDJ - 5,Quiz 'Marvel Cinematic Universe': RDJ - 0,Quiz 'Marvel Cinematic Universe': KN - 5
+
 let scoresElement = document.getElementById("scores");
 
 function loadScores() {
@@ -18,7 +22,7 @@ function loadScores() {
 	let scores: ScoreModel[] = localStorage.getItem("highscores")
 		.split(",").map(
 			(rawString) => {
-				let regex = /^(.+): (.+) - ([0-5])$/;
+				let regex = /^'(.+)': (.+) - ([0-5])$/;
 				let groups: string[] = rawString.split(regex).filter((str) => str !== "");
 				return {
 					quizName: groups[0],
@@ -46,15 +50,37 @@ function loadScores() {
 		return;
 	}
 
-	var scoreList = document.createElement("ol");
+	var scoreBoard = document.createElement("div");
+	scoreBoard.className = "score-board";
+
+	var quizGroup = document.createElement("div");
+	quizGroup.className = "quiz-group";
+
+	var currentQuiz = "";
 
 	for (const score of scores) {
-		scoreList.innerHTML += `
-			<li class="score">${score.quizName}: ${score.initials} - ${score.score}</li>
+		console.log(score);
+		if (currentQuiz !== score.quizName) {
+			currentQuiz = score.quizName;
+			scoreBoard.appendChild(quizGroup);
+
+			quizGroup = document.createElement("div");
+			quizGroup.className = "quiz-group";
+
+			quizGroup.innerHTML += `<div class="quiz-topic">${score.quizName}</div>`;
+		}
+
+		var scoreGroup = document.createElement("div");
+		scoreGroup.className = "score-group";
+		scoreGroup.innerHTML = `
+			<span class="initials">${score.initials}</span>
+			<span class="score">${score.score}</span>
 		`;
+
+		quizGroup.appendChild(scoreGroup);
 	}
 
-	scoresElement.appendChild(scoreList);
+	scoresElement.appendChild(scoreBoard);
 }
 
 function clearScores() {
