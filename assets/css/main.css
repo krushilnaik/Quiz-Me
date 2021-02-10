@@ -21,6 +21,6 @@ body {
 	max-width: 100%;
 }
 
-button:hover {
+button:hover, select:hover {
 	cursor: pointer;
 }
