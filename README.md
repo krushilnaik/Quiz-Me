@@ -7,6 +7,7 @@ Currently offered topics are:
 2. Marvel Cinematic Universe
 3. Harry Potter
 4. General Trivia
+5. Star Wars
 
 You get one point for each right answer. Each wrong answer cuts ten seconds off your remaining time.
 
