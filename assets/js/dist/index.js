@@ -53,9 +53,17 @@ function submissionForm() {
             alert("Please provide initials");
             return;
         }
-        var highscores = JSON.parse(localStorage.getItem("highscores"));
-        highscores[input.value] = runningScore;
-        localStorage.setItem("highscores", JSON.stringify(highscores));
+        var storedScores = localStorage.getItem("highscores");
+        var highscores;
+        if (storedScores === "") {
+            highscores = [];
+        }
+        else {
+            highscores = storedScores.split(",");
+        }
+        var topic = quizTopic.options[quizTopic.selectedIndex].value;
+        highscores.push("Quiz '" + topic + "': " + input.value + " - " + runningScore);
+        localStorage.setItem("highscores", highscores.toString());
         // redirect player to the highscores page
         window.location.replace("highscores.html");
     });
@@ -63,7 +71,9 @@ function submissionForm() {
     container.appendChild(form);
 }
 /**
- * Check the player's choice against the answer key.
+ * Check the player's choice against the answer key,
+ * then moves on to the next question.
+ * If that was the last question, bring up the score submission form.
  * @param userChoice which choice the user clicked on
  * @param questionNumber what question number they're on
  */
@@ -72,7 +82,7 @@ function checkAnswer(userChoice, questionNumber) {
     var correctChoice = quizQuestions.questions[questionNumber].correctChoice;
     var response = "Correct!";
     if (choiceIndex !== correctChoice) {
-        // chop off nine seconds, plus theh one from the regular countdown
+        // chop off nine seconds, plus one from already-running setInterval()
         countdown.innerText = String(Number(countdown.innerText) - 9);
         response = "Wrong!";
     }
@@ -144,7 +154,7 @@ function startGame() {
  */
 function loadPage() {
     if (localStorage.getItem("highscores") === null) {
-        localStorage.setItem("highscores", JSON.stringify({}));
+        localStorage.setItem("highscores", "");
     }
 }
 /**
