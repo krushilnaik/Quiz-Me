@@ -83,11 +83,20 @@ function submissionForm() {
 			return;
 		}
 
-		var highscores = JSON.parse(localStorage.getItem("highscores"));
+		var storedScores = localStorage.getItem("highscores");
+		var highscores: string[];
 
-		highscores[input.value] = runningScore;
+		if (storedScores === ""){
+			highscores = [];
+		} else {
+			highscores = storedScores.split(",");
+		}
 
-		localStorage.setItem("highscores", JSON.stringify(highscores));
+		let topic: string = quizTopic.options[quizTopic.selectedIndex].value;
+
+		highscores.push(`Quiz '${topic}': ${input.value} - ${runningScore}`);
+
+		localStorage.setItem("highscores", highscores.toString());
 
 		// redirect player to the highscores page
 		window.location.replace("highscores.html");
@@ -99,7 +108,9 @@ function submissionForm() {
 
 
 /**
- * Check the player's choice against the answer key.
+ * Check the player's choice against the answer key,
+ * then moves on to the next question.
+ * If that was the last question, bring up the score submission form.
  * @param userChoice which choice the user clicked on
  * @param questionNumber what question number they're on
  */
@@ -110,7 +121,7 @@ function checkAnswer(userChoice: HTMLButtonElement, questionNumber: number) {
 	let response: string = "Correct!";
 
 	if (choiceIndex !== correctChoice) {
-		// chop off nine seconds, plus theh one from the regular countdown
+		// chop off nine seconds, plus one from already-running setInterval()
 		countdown.innerText = String(Number(countdown.innerText) - 9);
 		response = "Wrong!";
 	} else {
@@ -207,7 +218,7 @@ function startGame() {
  */
 function loadPage() {
 	if (localStorage.getItem("highscores") === null) {
-		localStorage.setItem("highscores", JSON.stringify({}));
+		localStorage.setItem("highscores", "");
 	}
 }
 
