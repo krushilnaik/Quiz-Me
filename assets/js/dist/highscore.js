@@ -41,11 +41,9 @@ function loadScores() {
     var quizGroup = document.createElement("div");
     quizGroup.className = "quiz-group";
     var currentQuiz = "";
-    for (var _i = 0, scores_1 = scores; _i < scores_1.length; _i++) {
-        var score = scores_1[_i];
-        // console.log(i, score);
+    for (var _i = 0, _a = Object.entries(scores); _i < _a.length; _i++) {
+        var _b = _a[_i], i = _b[0], score = _b[1];
         if (currentQuiz !== score.quizName) {
-            // console.log(`Starting new quiz ${score.quizName}`);
             currentQuiz = score.quizName;
             scoreBoard.appendChild(quizGroup);
             quizGroup = document.createElement("div");
@@ -56,13 +54,10 @@ function loadScores() {
         scoreGroup.className = "score-group";
         scoreGroup.innerHTML = "\n\t\t\t<span class=\"initials\">" + score.initials + "</span>\n\t\t\t<span class=\"score\">" + score.score + "</span>\n\t\t";
         quizGroup.appendChild(scoreGroup);
-        // if (i === scores.length - 1) {
-        // 	scoreBoard.appendChild(quizGroup);
-        // }
+        if (Number(i) === scores.length - 1) {
+            scoreBoard.appendChild(quizGroup);
+        }
     }
-    // manually append the last group
-    // because the for loop finished before it got the chance to
-    scoreBoard.appendChild(quizGroup);
     scoresElement.appendChild(scoreBoard);
 }
 function clearScores() {

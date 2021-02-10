@@ -57,12 +57,8 @@ function loadScores() {
 	quizGroup.className = "quiz-group";
 
 	var currentQuiz = "";
-
-
-	for (const score of scores) {
-		// console.log(i, score);
+	for (const [i, score] of Object.entries(scores)) {
 		if (currentQuiz !== score.quizName) {
-			// console.log(`Starting new quiz ${score.quizName}`);
 			currentQuiz = score.quizName;
 
 			scoreBoard.appendChild(quizGroup);
@@ -82,14 +78,10 @@ function loadScores() {
 
 		quizGroup.appendChild(scoreGroup);
 
-		// if (i === scores.length - 1) {
-		// 	scoreBoard.appendChild(quizGroup);
-		// }
+		if (Number(i) === scores.length - 1) {
+			scoreBoard.appendChild(quizGroup);
+		}
 	}
-
-	// manually append the last group
-	// because the for loop finished before it got the chance to
-	scoreBoard.appendChild(quizGroup);
 
 	scoresElement.appendChild(scoreBoard);
 }

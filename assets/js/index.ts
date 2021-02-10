@@ -185,6 +185,12 @@ function startGame() {
 	let topic: string = quizTopic.options[quizTopic.selectedIndex].value;
 	let filename: string = `${topic.toLowerCase().replace(/ /g, "-")}.json`;
 
+	var test = fetch(`assets/json/${filename}`).then(
+		(response) => response.json()
+	);
+
+	console.log(test);
+
 	var xhr = new XMLHttpRequest();
 
 	// try pulling the quiz file corresponding to the selected topic
