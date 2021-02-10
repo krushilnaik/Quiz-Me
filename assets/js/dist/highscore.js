@@ -1,6 +1,6 @@
 // Backup highscores
 // 
-// Quiz 'JavaScript': KN - 5,Quiz 'Star Wars': KN - 5,Quiz 'JavaScript': KN - 3,Quiz 'JavaScript': RDJ - 5,Quiz 'Marvel Cinematic Universe': RDJ - 0,Quiz 'Marvel Cinematic Universe': KN - 5
+// 'JavaScript': KN - 5,'Star Wars': KN - 5,'JavaScript': KN - 3,'JavaScript': RDJ - 5,'Marvel Cinematic Universe': RDJ - 0,'Marvel Cinematic Universe': KN - 5
 var scoresElement = document.getElementById("scores");
 function loadScores() {
     scoresElement.innerHTML = "";
@@ -43,8 +43,9 @@ function loadScores() {
     var currentQuiz = "";
     for (var _i = 0, scores_1 = scores; _i < scores_1.length; _i++) {
         var score = scores_1[_i];
-        console.log(score);
+        // console.log(i, score);
         if (currentQuiz !== score.quizName) {
+            // console.log(`Starting new quiz ${score.quizName}`);
             currentQuiz = score.quizName;
             scoreBoard.appendChild(quizGroup);
             quizGroup = document.createElement("div");
@@ -55,7 +56,13 @@ function loadScores() {
         scoreGroup.className = "score-group";
         scoreGroup.innerHTML = "\n\t\t\t<span class=\"initials\">" + score.initials + "</span>\n\t\t\t<span class=\"score\">" + score.score + "</span>\n\t\t";
         quizGroup.appendChild(scoreGroup);
+        // if (i === scores.length - 1) {
+        // 	scoreBoard.appendChild(quizGroup);
+        // }
     }
+    // manually append the last group
+    // because the for loop finished before it got the chance to
+    scoreBoard.appendChild(quizGroup);
     scoresElement.appendChild(scoreBoard);
 }
 function clearScores() {

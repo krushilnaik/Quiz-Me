@@ -27,7 +27,7 @@ button {
 .score-board {
 	background-color: indianred;
 	padding: 1%;
-	border-radius: 8px;
+	border-radius: 10px;
 	color: honeydew;
 }
 
@@ -39,14 +39,14 @@ button {
 	width: fit-content;
 	background-color: tomato;
 	padding: .5% 1%;
-	border-top-left-radius: 8px;
-	border-top-right-radius: 8px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 	border-bottom: dashed 1px #bd6157;
 }
 
 .score-group {
 	padding: .8%;
-	background-color: tomato;
+	background-color: #ff6e55;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	column-gap: 1%;
@@ -54,9 +54,12 @@ button {
 	.score-group:nth-child(odd) {
 		background-color: #ff7e67;
 	}
+	.score-group:nth-child(2) {
+		border-top-right-radius: 10px;
+	}
 	.score-group:last-child {
-		border-bottom-left-radius: 8px;
-		border-bottom-right-radius: 8px;
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
 	}
 	.score-group span {
 		width: fit-content;
