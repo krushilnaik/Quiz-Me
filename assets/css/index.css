@@ -81,14 +81,19 @@ hr {
 	margin-bottom: 5%;
 	/* width: fit-content; */
 }
-	.choices-block .choice, .submit {
+	.choices-block .choice,
+	.submit {
 		font-size: .9rem;
-		line-height: 1.1rem;
+		line-height: 1.2rem;
 		width: fit-content;
 		border-radius: 5px;
 		background-color: var(--quiz-red);
 		color: white;
+		transition: .2s;
 	}
+		.choice:hover {
+			background-color: var(--quiz-red-alt);
+		}
 
 input {
 	line-height: 1rem;
