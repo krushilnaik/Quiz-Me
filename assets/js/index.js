@@ -4,19 +4,8 @@ var countdown   = document.getElementById("countdown");
 var container   = document.querySelector(".container");
 var quizTopic   = document.querySelector("select");
 
-interface QuestionModel {
-	question: string;
-	choices: string[];
-	correctChoice: number;
-}
-
-interface QuizModel {
-	topicName: string;
-	questions: QuestionModel[];
-}
-
-var runningScore: number = 0;
-var quizQuestions: QuizModel;
+var runningScore = 0;
+var quizQuestions;
 
 /**
  * This will be used in conjunction with setInterval()
@@ -84,7 +73,7 @@ function submissionForm() {
 		}
 
 		var storedScores = localStorage.getItem("highscores");
-		var highscores: string[];
+		var highscores;
 
 		if (storedScores === ""){
 			highscores = [];
@@ -92,7 +81,7 @@ function submissionForm() {
 			highscores = storedScores.split(",");
 		}
 
-		let topic: string = quizTopic.options[quizTopic.selectedIndex].value;
+		let topic = quizTopic.options[quizTopic.selectedIndex].value;
 
 		highscores.push(`'${topic}': ${input.value} - ${runningScore}`);
 
@@ -114,11 +103,11 @@ function submissionForm() {
  * @param userChoice which choice the user clicked on
  * @param questionNumber what question number they're on
  */
-function checkAnswer(userChoice: HTMLButtonElement, questionNumber: number) {
-	let choiceIndex: number = Number(userChoice.innerText[0]) - 1;
-	let correctChoice: number = quizQuestions.questions[questionNumber].correctChoice;
+function checkAnswer(userChoice, questionNumber) {
+	let choiceIndex = Number(userChoice.innerText[0]) - 1;
+	let correctChoice = quizQuestions.questions[questionNumber].correctChoice;
 
-	let response: string = "Correct!";
+	let response = "Correct!";
 
 	if (choiceIndex !== correctChoice) {
 		// chop off nine seconds, plus one from already-running setInterval()
@@ -150,10 +139,10 @@ function checkAnswer(userChoice: HTMLButtonElement, questionNumber: number) {
  * Render the question and its choices into the DOM.
  * @param questionNumber the question number the player is on
  */
-function buildQuestion(questionNumber: number): HTMLElement {
+function buildQuestion(questionNumber) {
 	var element = document.createElement("div");
 
-	var currentQuestion: QuestionModel = quizQuestions.questions[questionNumber];
+	var currentQuestion = quizQuestions.questions[questionNumber];
 	var element = document.createElement("p");
 	element.innerText = currentQuestion.question;
 
@@ -181,8 +170,8 @@ function buildQuestion(questionNumber: number): HTMLElement {
  * Look at the selected topic and build the quiz.
  */
 function startGame() {
-	let topic: string = quizTopic.options[quizTopic.selectedIndex].value;
-	let filename: string = `${topic.toLowerCase().replace(/ /g, "-")}.json`;
+	let topic = quizTopic.options[quizTopic.selectedIndex].value;
+	let filename = `${topic.toLowerCase().replace(/ /g, "-")}.json`;
 
 	var test = fetch(`assets/json/${filename}`).then(
 		(response) => response.json()

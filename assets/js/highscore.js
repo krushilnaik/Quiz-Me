@@ -1,13 +1,3 @@
-interface ScoreModel {
-	quizName: string;
-	initials: string;
-	score: number;
-}
-
-// Backup highscores
-// 
-// 'JavaScript': KN - 5,'Star Wars': KN - 5,'JavaScript': KN - 3,'JavaScript': RDJ - 5,'Marvel Cinematic Universe': RDJ - 0,'Marvel Cinematic Universe': KN - 5
-
 let scoresElement = document.getElementById("scores");
 
 function loadScores() {
@@ -19,11 +9,11 @@ function loadScores() {
 		return;
 	}
 
-	let scores: ScoreModel[] = localStorage.getItem("highscores")
+	let scores = localStorage.getItem("highscores")
 		.split(",").map(
 			(rawString) => {
 				let regex = /^'(.+)': (.+) - ([0-5])$/;
-				let groups: string[] = rawString.split(regex).filter((str) => str !== "");
+				let groups = rawString.split(regex).filter((str) => str !== "");
 				return {
 					quizName: groups[0],
 					initials: groups[1],
